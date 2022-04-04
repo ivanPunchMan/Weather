@@ -8,6 +8,8 @@
 import UIKit
 
 class MainTableView: UITableView {
+    
+//MARK: -  init
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
@@ -17,11 +19,9 @@ class MainTableView: UITableView {
         backgroundColor = .brown
         translatesAutoresizingMaskIntoConstraints = false
         
-        register(UINib(nibName: "CellWeatherInLocation", bundle: nil), forCellReuseIdentifier: CellWeatherInLocation.reuseId)
+        register(UINib(nibName: "WeatherInLocationCell", bundle: nil), forCellReuseIdentifier: WeatherInLocationCell.reuseId)
         register(PerHourTableViewCell.self, forCellReuseIdentifier: PerHourTableViewCell.reuseId)
         
-//        rowHeight = 100
-
     }
     
     required init?(coder: NSCoder) {
@@ -34,7 +34,7 @@ class MainTableView: UITableView {
     
 }
 
-
+//MARK: - UITableViewDataSource
 
 extension MainTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,12 +43,9 @@ extension MainTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         switch indexPath.row {
         case 0:
-            let cell = dequeueReusableCell(withIdentifier: CellWeatherInLocation.reuseId, for: indexPath) as! CellWeatherInLocation
-//            let cell = dequeueReusableCell(withIdentifier: PerHourTableViewCell.reuseId, for: indexPath) as! PerHourTableViewCell
-
+            let cell = dequeueReusableCell(withIdentifier: WeatherInLocationCell.reuseId, for: indexPath) as! WeatherInLocationCell
             return cell
         case 1:
             let cell = dequeueReusableCell(withIdentifier: PerHourTableViewCell.reuseId, for: indexPath) as! PerHourTableViewCell
@@ -56,16 +53,19 @@ extension MainTableView: UITableViewDataSource {
         default:
             break
         }
-        let cell = dequeueReusableCell(withIdentifier: CellWeatherInLocation.reuseId, for: indexPath) as! CellWeatherInLocation
+        
+        let cell = dequeueReusableCell(withIdentifier: WeatherInLocationCell.reuseId, for: indexPath) as! WeatherInLocationCell
         return cell
         
     }
 }
 
+//MARK: - UITableViewDelegate
 
 extension MainTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         switch indexPath.row {
         case 0:
             return UITableView.automaticDimension

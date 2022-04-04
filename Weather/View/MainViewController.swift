@@ -53,17 +53,11 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    
-    
-    private var weatherPerHourView = WeatherPerHourView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
-        
-        button.addTarget(self, action: #selector(loadWeather), for: .touchUpInside)
-        
+                
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.setWeather()
         }
@@ -71,21 +65,16 @@ class MainViewController: UIViewController {
     
     func configureTableView() {
         let tableView = MainTableView(frame: view.bounds, style: .grouped)
-    
         view.addSubview(tableView)
-        
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-    }
-    
-    @objc func loadWeather() {
-        setWeather()
     }
 }
 
 
 
 extension MainViewController: MainViewControllerProtocol {
+    
+    
     func setWeather() {
 
         if presenter.weather != nil {
