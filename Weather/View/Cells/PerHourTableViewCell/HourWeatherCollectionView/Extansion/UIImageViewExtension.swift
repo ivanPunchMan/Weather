@@ -11,7 +11,7 @@ import UIKit
 extension UIImageView {
     convenience init(imageName: String) {
         self.init(frame: .zero)
-        self.image = UIImage(named: imageName)
-        self.translatesAutoresizingMaskIntoConstraints = false
+        image = UIImage(named: imageName)
+        translatesAutoresizingMaskIntoConstraints = false
     }
 }

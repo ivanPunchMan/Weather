@@ -12,7 +12,7 @@ protocol TableViewCellPotocol: AnyObject {
     init()
 }
 
-class WeatherPerHourCollectionView: UICollectionView {
+class HourWeatherCollectionView: UICollectionView {
     
 //MARK: - init
     required init() {
@@ -21,16 +21,13 @@ class WeatherPerHourCollectionView: UICollectionView {
         layout.estimatedItemSize = CGSize(width: 100, height: 100)
         
         super.init(frame: .zero, collectionViewLayout: layout)
-        register(WeatherPerHourCell.self, forCellWithReuseIdentifier: WeatherPerHourCell.reuseId)
+        register(IndicatorsCell.self, forCellWithReuseIdentifier: IndicatorsCell.reuseId)
+        register(HourWeatherCell.self, forCellWithReuseIdentifier: HourWeatherCell.reuseId)
         backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
         delegate = self
         dataSource = self
         
-        
-        
         translatesAutoresizingMaskIntoConstraints = false
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -44,29 +41,29 @@ class WeatherPerHourCollectionView: UICollectionView {
 }
 
 //MARK: - UICollectionViewDataSource
-extension WeatherPerHourCollectionView: UICollectionViewDataSource {
+extension HourWeatherCollectionView: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 25
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = dequeueReusableCell(withReuseIdentifier: WeatherPerHourCell.reuseId, for: indexPath)
-            
-        return cell
+        
+        switch indexPath.row {
+        case 0:
+            let cell = dequeueReusableCell(withReuseIdentifier: IndicatorsCell.reuseId, for: indexPath) as! IndicatorsCell
+            return cell
+        default:
+            let cell = dequeueReusableCell(withReuseIdentifier: HourWeatherCell.reuseId, for: indexPath) as! HourWeatherCell
+            return cell
+        }
     }
     
     
 }
 
 //MARK: - UICollectionViewDelegate
-extension WeatherPerHourCollectionView: UICollectionViewDelegate {
+extension HourWeatherCollectionView: UICollectionViewDelegate {
     
-}
-
-extension WeatherPerHourCollectionView: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 50, height: 50)
-//    }
 }

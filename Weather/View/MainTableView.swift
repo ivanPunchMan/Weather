@@ -20,7 +20,7 @@ class MainTableView: UITableView {
         translatesAutoresizingMaskIntoConstraints = false
         
         register(UINib(nibName: "WeatherInLocationCell", bundle: nil), forCellReuseIdentifier: WeatherInLocationCell.reuseId)
-        register(PerHourTableViewCell.self, forCellReuseIdentifier: PerHourTableViewCell.reuseId)
+        register(HourWeatherTableViewCell.self, forCellReuseIdentifier: HourWeatherTableViewCell.reuseId)
         
     }
     
@@ -48,7 +48,7 @@ extension MainTableView: UITableViewDataSource {
             let cell = dequeueReusableCell(withIdentifier: WeatherInLocationCell.reuseId, for: indexPath) as! WeatherInLocationCell
             return cell
         case 1:
-            let cell = dequeueReusableCell(withIdentifier: PerHourTableViewCell.reuseId, for: indexPath) as! PerHourTableViewCell
+            let cell = dequeueReusableCell(withIdentifier: HourWeatherTableViewCell.reuseId, for: indexPath) as! HourWeatherTableViewCell
             return cell
         default:
             break
